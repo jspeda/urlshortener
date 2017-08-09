@@ -1,6 +1,22 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+const dotenv = require('dotenv').config({path: 'variables.env'});
 const path = require('path');
+
+
+mongoose.connect(process.env.DATABASE, (err) => {
+  if (err) return console.log('error')
+});
+
+
+const Schema = mongoose.Schema;
+
+const urlSchema = new Schema({
+  slug: String,
+  original_url: String
+})
+
 
 app.set('port', (process.env.PORT || 8000));
 
